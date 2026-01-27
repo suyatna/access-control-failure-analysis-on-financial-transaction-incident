@@ -73,5 +73,5 @@ Berikut adalah rangkuman hasil pengamatan soal kontrol akses yang terlibat di in
 
 Secara keseluruhan, tabel ini menunjukan kalau masalah utama bukan di sistem yang error, tapi di pengelolaan akses pengguna. Akun yang seharusnya sudah tidak aktif masih bisa melakukan aksi penting. Kontrol autentikasi dan otorisasi berjalan, tapi tidak dikawal dengan manajemen akun yang rapi. Kondisi ini membuat sistem gampang disalahgunakan tanpa perlu teknik serangan yang rumit.
 
-
+ 
 
