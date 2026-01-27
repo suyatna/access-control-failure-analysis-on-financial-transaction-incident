@@ -11,27 +11,27 @@
 
 ## 🧠 Background <a name="background">
 
-Studi kasus ini saya buat sebagai latihan cybersecurity dengan fokus pada penilaian kontrol akses di lingkungan bisnis yang sedang berkembang. Skenario menggambarkan kondisi ketika perusahaan menghadapi transaksi keuangan yang tidak dikenali dan tim keamanan perlu memahami bagaimana akses sistem digunakan sebelum menentukan langkah pengamanan yang tepat.
+Studi kasus ini saya buat sebagai latihan kuliah cybersecurity dengan fokus ke kontrol akses dan kejadian finansial yang terjadi di dalam sistem bisnis. Skenario menggambarkan kondisi perusahaan yang sedang berkembang dan mulai bergantung pada sistem digital untuk mengelola transaksi penting, termasuk keuangan. Situasi ini menunjukkan bagaimana satu aktivitas yang terlihat kecil bisa berdampak besar kalau akses pengguna tidak dikontrol dengan baik.
 
-Latihan ini mengacu pada Google Cybersecurity Professional Certificate, khususnya course Assets, Threats, and Vulnerabilities serta pembahasan access control. Proses analisis dimulai dengan meninjau event log untuk melihat aktivitas pengguna, dilanjutkan dengan pencocokan data tersebut dengan direktori karyawan. Hasil peninjauan digunakan sebagai dasar untuk mengidentifikasi kelemahan authentication dan authorization, lalu menyusun rekomendasi perbaikan yang realistis sesuai konteks operasional bisnis.
+Latihan ini mengacu ke materi Google Cybersecurity Professional Certificate, khususnya course Assets, Threats, and Vulnerabilities. Pembahasan saya mulai dengan memahami aset apa yang paling krusial di kasus ini, lalu melihat ancaman dan kelemahan yang muncul lewat penyalahgunaan akun. Proses ini membantu saya memahami bahwa risiko tidak selalu muncul karena sistem diserang, tapi juga bisa muncul karena kontrol akses yang longgar dan kurang diawasi.
 
 ---
 
 ## 🧩 Scenario overview <a name="scenario">
 
-Skenario ini menempatkan saya sebagai profesional keamanan siber pertama di sebuah bisnis yang sedang berkembang. Masalah muncul ketika ditemukan adanya setoran ke rekening bank yang tidak dikenal. Manajer keuangan memastikan tidak pernah melakukan transaksi tersebut dan pembayaran berhasil dihentikan sebelum dana benar-benar terkirim.
+Skenario ini menceritakan kondisi bisnis yang lagi tumbuh dan baru pertama kali punya peran khusus di bidang cyber security. Saya diposisikan sebagai orang pertama yang pegang urusan keamanan. Masalah muncul saat ada setoran uang ke rekening bank yang tidak dikenal. Pihak keuangan merasa tidak pernah melakukan transaksi tersebut dan akhirnya pembayaran bisa dihentikan sebelum benar-benar terjadi kerugian.
 
-Pemilik bisnis kemudian meminta dilakukan penelusuran untuk memahami apa yang sebenarnya terjadi dan mencegah kejadian serupa. Proses analisis dimulai dengan meninjau log akses sistem yang mencatat aktivitas terkait insiden. Data tersebut dipakai untuk mengidentifikasi pengguna yang terlibat dan melihat pola akses yang mencurigakan. Informasi ini kemudian dicocokkan dengan data karyawan untuk menemukan kelemahan kontrol akses yang dimanfaatkan. Hasil temuan menjadi dasar penyusunan rekomendasi mitigasi yang lebih masuk akal dan relevan dengan kondisi operasional bisnis.
+Tugas saya di skenario ini fokus ke mencari tahu apa yang sebenarnya terjadi. Proses dimulai dengan melihat log akses yang terkait kejadian itu. Log ini dipakai untuk melihat aktivitas akun, waktu akses, dan kemungkinan penyalahgunaan akun. Catatan kecil mulai dikumpulkan untuk menebak siapa aktor ancamannya dan bagaimana akses bisa terjadi.
+
+Langkah berikutnya melihat kontrol akses yang dipakai di sistem. Bagian ini membantu saya memahami celah apa yang dimanfaatkan pengguna, baik karena hak akses terlalu luas atau akun yang seharusnya sudah tidak aktif. Skenario ini ditutup dengan membuat rekomendasi sederhana berdasarkan temuan tadi, supaya kontrol akses bisa diperbaiki dan kejadian serupa tidak gampang terulang.
 
 ---
 
 ## 📄 Incident evidence <a name="incident">
 
-Bagian ini menyajikan data mentah yang digunakan dalam proses analisis insiden. Informasi ditampilkan langsung berdasarkan hasil pencatatan sistem dan direktori karyawan, tanpa interpretasi atau kesimpulan.
-
 ### Event log summary
 
-Tabel berikut menunjukkan detail log kejadian yang tercatat oleh sistem saat insiden payroll terjadi:
+Bagian ini saya lihat untuk tahu aktivitas apa yang terjadi di sistem saat insiden. Data event log menunjukan ada perubahan penting terkait payroll dan rekening bank. Informasi ini jadi petunjuk awal siapa akun yang dipakai dan kapan kejadian berlangsung.
 
 | Field          | Value                          |
 | -------------- | ------------------------------ |
@@ -48,20 +48,20 @@ Tabel berikut menunjukkan detail log kejadian yang tercatat oleh sistem saat ins
 
 ### Employee directory snapshot
 
-Tabel berikut menampilkan data direktori karyawan yang tercatat dalam sistem pada waktu insiden terjadi:
+Bagian ini saya pakai untuk mencocokkan IP address dan akun yang muncul di log. Fokusnya ke siapa saja yang masih punya akses admin dan status akunnya. Beberapa akun terlihat sudah tidak aktif secara kontrak tapi masih tercatat punya akses penuh.
 
 | Name              | Role             | Email                                                   | IP Address      | Status     | Authorization | Last Access                  | Start Date | End Date   |
 | ----------------- | ---------------- | ------------------------------------------------------- | --------------- | ---------- | ------------- | ---------------------------- | ---------- | ---------- |
-| Lisa Lawrence     | Office manager   | [l.lawrence@erems.net](mailto:l.lawrence@erems.net)     | 118.119.20.150  | Full-time  | Admin         | 12:27:19 pm (0 minutes ago)  | 10/01/2019 | N/A        |
-| Jesse Pena        | Graphic designer | [j.pena@erems.net](mailto:j.pena@erems.net)             | 186.125.232.66  | Part-time  | Admin         | 4:55:05 pm (1 day ago)       | 11/16/2020 | N/A        |
-| Catherine Martin  | Sales associate  | [catherine_M@erems.net](mailto:catherine_M@erems.net)   | 247.168.184.57  | Full-time  | Admin         | 12:17:34 am (10 minutes ago) | 10/01/2019 | N/A        |
-| Jyoti Patil       | Account manager  | [j.patil@erems.net](mailto:j.patil@erems.net)           | 159.250.146.63  | Full-time  | Admin         | 10:03:08 am (2 hours ago)    | 10/01/2019 | N/A        |
-| Joanne Phelps     | Sales associate  | [j_phelps123@erems.net](mailto:j_phelps123@erems.net)   | 249.57.94.27    | Seasonal   | Admin         | 1:24:57 pm (2 years ago)     | 11/16/2020 | 01/31/2020 |
-| Ariel Olson       | Owner            | [a.olson@erems.net](mailto:a.olson@erems.net)           | 19.7.235.151    | Full-time  | Admin         | 12:24:41 pm (4 minutes ago)  | 08/01/2019 | N/A        |
-| Robert Taylor Jr. | Legal attorney   | [rt.jr@erems.net](mailto:rt.jr@erems.net)               | 152.207.255.255 | Contractor | Admin         | 8:29:57 am (5 days ago)      | 09/04/2019 | 12/27/2019 |
-| Amanda Pearson    | Manufacturer     | [amandap987@erems.net](mailto:amandap987@erems.net)     | 101.225.113.171 | Contractor | Admin         | 6:24:19 pm (3 months ago)    | 08/05/2019 | N/A        |
-| George Harris     | Security analyst | [georgeharris@erems.net](mailto:georgeharris@erems.net) | 70.188.129.105  | Full-time  | Admin         | 05:05:22 pm (1 day ago)      | 01/24/2022 | N/A        |
-| Lei Chu           | Marketing        | [lei.chu@erems.net](mailto:lei.chu@erems.net)           | 53.49.27.117    | Part-time  | Admin         | 3:05:00 pm (2 days ago)      | 11/16/2020 | 01/31/2020 |
+| Lisa Lawrence     | Office manager   | l.lawrence@erems.net                                    | 118.119.20.150  | Full-time  | Admin         | 12:27:19 pm (0 minutes ago)  | 10/01/2019 | N/A        |
+| Jesse Pena        | Graphic designer | j.pena@erems.net                                        | 186.125.232.66  | Part-time  | Admin         | 4:55:05 pm (1 day ago)       | 11/16/2020 | N/A        |
+| Catherine Martin  | Sales associate  | catherine_M@erems.net                                   | 247.168.184.57  | Full-time  | Admin         | 12:17:34 am (10 minutes ago) | 10/01/2019 | N/A        |
+| Jyoti Patil       | Account manager  | j.patil@erems.net                                       | 159.250.146.63  | Full-time  | Admin         | 10:03:08 am (2 hours ago)    | 10/01/2019 | N/A        |
+| Joanne Phelps     | Sales associate  | j_phelps123@erems.net                                   | 249.57.94.27    | Seasonal   | Admin         | 1:24:57 pm (2 years ago)     | 11/16/2020 | 01/31/2020 |
+| Ariel Olson       | Owner            | a.olson@erems.net                                       | 19.7.235.151    | Full-time  | Admin         | 12:24:41 pm (4 minutes ago)  | 08/01/2019 | N/A        |
+| Robert Taylor Jr. | Legal attorney   | rt.jr@erems.net                                         | 152.207.255.255 | Contractor | Admin         | 8:29:57 am (5 days ago)      | 09/04/2019 | 12/27/2019 |
+| Amanda Pearson    | Manufacturer     | amandap987@erems.net                                    | 101.225.113.171 | Contractor | Admin         | 6:24:19 pm (3 months ago)    | 08/05/2019 | N/A        |
+| George Harris     | Security analyst | georgeharris@erems.net                                  | 70.188.129.105  | Full-time  | Admin         | 05:05:22 pm (1 day ago)      | 01/24/2022 | N/A        |
+| Lei Chu           | Marketing        | lei.chu@erems.net                                       | 53.49.27.117    | Part-time  | Admin         | 3:05:00 pm (2 days ago)      | 11/16/2020 | 01/31/2020 |
 
 ## 🧠 Access control worksheet <a name="worksheet">
 
