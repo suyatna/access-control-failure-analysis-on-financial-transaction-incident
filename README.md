@@ -10,7 +10,7 @@
 
 ## 🧠 Background <a name="background">
 
-Studi kasus ini saya kerjakan sebagai latihan kuliah cybersecurity yang membahas kontrol akses dan kejadian finansial di sistem bisnis. Skenario ini menggambarkan perusahaan yang lagi berkembang dan mulai banyak mengandalkan sistem digital untuk mengurus transaksi penting, termasuk urusan keuangan. Kondisi ini bikin saya sadar kalau satu aktivitas kecil bisa punya dampak besar saat akses pengguna tidak dijaga dengan baik.
+Studi kasus ini saya kerjakan sebagai latihan cybersecurity yang membahas kontrol akses dan kejadian finansial di sistem bisnis. Skenario ini menggambarkan perusahaan yang lagi berkembang dan mulai banyak mengandalkan sistem digital untuk mengurus transaksi penting, termasuk urusan keuangan. Kondisi ini bikin saya sadar kalau satu aktivitas kecil bisa punya dampak besar saat akses pengguna tidak dijaga dengan baik.
 
 Latihan ini mengacu ke materi Google Cybersecurity Professional Certificate, terutama course Assets, Threats, and Vulnerabilities. Pembahasan saya mulai dengan melihat aset apa yang paling penting di kasus ini, lalu menelusuri ancaman dan celah yang muncul lewat penggunaan akun. Proses ini memberi pemahaman kalau risiko tidak selalu muncul karena serangan teknis, tapi sering muncul karena kontrol akses yang terlalu longgar dan kurang dipantau.
 
